@@ -5,7 +5,7 @@ let volumeMeter;
 let volumeFill;
 
 function preload() {
-  song = loadSound("03 NEVER ME MIX7.wav");
+  song = loadSound("03 NEVER ME MIX7.mp3");
   noise = loadSound("white.mp3");
 }
 

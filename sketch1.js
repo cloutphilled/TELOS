@@ -7,7 +7,7 @@ var correctOsc;
 var wrongOsc;
 
 function preload() {
-  song = loadSound("05 I_VE BEEN GONE FOR SO LONG MIX7.wav");
+  song = loadSound("05 I_VE BEEN GONE FOR SO LONG MIX7.mp3");
   noise = loadSound("white.mp3");
 }
 

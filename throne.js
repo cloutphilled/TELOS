@@ -13,7 +13,7 @@ var ozkavoshWords = [
 ];
 
 function preload(){
-  song = loadSound("10 THRONE MIX7.wav");
+  song = loadSound("10 THRONE MIX7.mp3");
   noise = loadSound("white.mp3");
 }
 

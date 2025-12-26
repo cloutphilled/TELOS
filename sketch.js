@@ -2,7 +2,7 @@ let song;
 let noise;
 
 function preload() {
-song = loadSound("02 BASTION MIX7.wav");
+song = loadSound("02 BASTION MIX7.mp3");
 noise = loadSound("white.mp3");
 }
 

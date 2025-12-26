@@ -31,16 +31,22 @@
     <script src="throne.js" type="text/javascript"></script>
     <script>
       // Move p5.js buttons into container after they're created
-      setTimeout(() => {
+      function moveButtons() {
         const container = document.getElementById('p5-buttons');
         const buttons = document.querySelectorAll('button:not(.button)');
         console.log('Found buttons:', buttons.length);
+        if (buttons.length === 0) {
+          // Retry if buttons not ready yet (audio still loading)
+          setTimeout(moveButtons, 500);
+          return;
+        }
         buttons.forEach(btn => {
           if (!btn.classList.contains('button')) {
             container.appendChild(btn);
           }
         });
-      }, 1000);
+      }
+      setTimeout(moveButtons, 1000);
     </script>
 </body>
 </html>
