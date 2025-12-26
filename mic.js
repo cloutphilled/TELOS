@@ -1,54 +1,61 @@
-let is_sound_playing = false;
 let input;
-let analyzer;
 let song;
+let noise;
+let volumeMeter;
+let volumeFill;
 
-function preload(){
+function preload() {
   song = loadSound("03 NEVER ME MIX7.wav");
   noise = loadSound("white.mp3");
 }
 
 function setup() {
-  /* createCanvas(1240, 1080);
-  background(255); */
+  createCanvas(1, 1);
   noise.play();
   noise.setVolume(0.1);
   input = new p5.AudioIn();
   input.start();
+  
+  // Create volume meter
+  volumeMeter = createDiv('');
+  volumeMeter.id('volume-meter');
+  
+  volumeFill = createDiv('');
+  volumeFill.id('volume-fill');
+  volumeFill.parent(volumeMeter);
+  
+  // Add threshold line
+  let thresholdLine = createDiv('');
+  thresholdLine.id('threshold-line');
+  thresholdLine.parent(volumeMeter);
 }
 
 function draw() {
-let volume = input.getLevel();
-let threshold = 0.5;
-  if (!is_sound_playing && (volume > threshold)){
-    is_sound_playing = false;
-    song.play();
-    noise.stop();
-    } 
-  }
-
-function stopSong() {
-  background(1);
-  if (keyIsPressed) 
-    {
-      song.pause();
-    }
-  }
-
-  {
-    stroke(0);
-    fill(0, 100);
-    rect(random(40, width), random(height), volume * 50, volume * 50);
+  let volume = input.getLevel();
+  let threshold = 0.3;
+  
+  // Update volume meter (scale volume for better visibility)
+  let meterHeight = Math.min(volume * 300, 100);
+  document.getElementById('volume-fill').style.height = meterHeight + '%';
+  
+  // Change color based on volume
+  if (volume > threshold) {
+    document.getElementById('volume-fill').style.background = '#ff3333';
+  } else {
+    document.getElementById('volume-fill').style.background = '#ffffff';
   }
   
- /* {
-  let y = map(volume, 0, 1, height, 0);
-  let ythreshold = map(threshold, 0, 1, height, 0);
-  noStroke();
-  fill(175);
-  rect(0, 0, 20, height);
-  fill(0);
-  rect(0, y, 20, y);
-  stroke(0);
-  line(0, ythreshold, 19, ythreshold);
-} */
+  if (song.isPlaying()) return;
+  
+  if (volume > threshold) {
+    song.play();
+    song.setVolume(0.5);
+    noise.stop();
+    
+    // Change tooltip
+    document.getElementById('tooltip').innerHTML = "You found your voice";
+    
+    // Success animation
+    document.getElementById('volume-meter').classList.add('success');
+  }
+}
