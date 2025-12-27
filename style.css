@@ -285,7 +285,7 @@ body > button:not(.button):hover {
 }
 
 #volume-meter::before {
-	content: 'CAN I SCREAM?';
+	content: '';
 	position: absolute;
 	bottom: -30px;
 	left: 50%;
